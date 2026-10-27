@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Espace Soned Afrique</title>
+<meta name="description" content="Espace Soned Afrique : pointage des présences, au bureau et en télétravail.">
+<meta name="theme-color" content="#138a2f">
+<meta name="color-scheme" content="light">
+<meta name="referrer" content="no-referrer">
+<link rel="manifest" href="manifest.webmanifest">
+<script>/* garde l'invitation d'installation du navigateur dès le chargement, pour que le bouton « Installer » marche vraiment */
+window.__bip=null;window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__bip=e;window.dispatchEvent(new Event("bipready"))});</script>
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Soned Afrique">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="style.css">
+<!-- Conçu et développé par Mamadou Fall — P.Scann by Soned © 2026 -->
+</head>
+<body class="splash-on">
+
+<div id="splash" role="button" tabindex="0" aria-label="Entrer dans Espace Soned Afrique">
+  <div class="arrows" aria-hidden="true"><i style="top:8%"></i><i style="top:20%"></i><i style="top:32%"></i><i style="top:68%"></i><i style="top:80%"></i><i style="top:92%"></i></div>
+  <div class="logo"><img id="splashLogo" alt="Soned"></div>
+  <h1>Espace Soned <span>Afrique</span></h1>
+  <p>Bienvenue. Votre présence, au bureau ou à distance, en un geste.</p>
+  <div class="when" id="splashDate"></div>
+  <div class="tap">Touchez pour entrer</div>
+  <div class="by">Développé par Mamadou Fall</div>
+</div>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><img id="topLogo" alt=""><div><b>Espace Soned</b><small>Afrique</small></div></div>
+  <button class="iconbtn inst" id="instTop" type="button" hidden aria-label="Installer l’application" title="Installer l’application"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v10M8 10.5l4 4 4-4"/><path d="M5 18.5h14"/></svg></button>
+  <button class="iconbtn" id="mailBtn" type="button" aria-label="Contacter le RH, l’informaticien ou le développeur" title="Un problème ? Écrivez-nous">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7.5 8 6 8-6"/></svg>
+  </button>
+</div></header>
+
+<main class="wrap" id="main">
+  <div id="installBox" class="install" hidden><img src="icons/icon-192.png" alt=""><div><b>Installer l’application</b><span class="muted" id="installTxt">Accès direct depuis votre écran d’accueil.</span><button class="link later" id="installLater" type="button">Plus tard</button></div><button class="btn sm" id="installBtn" type="button">Installer</button></div>
+
+  <!-- POINTER -->
+  <section id="v-point">
+    <div class="hero">
+      <div class="hi" id="hi">Bonjour</div>
+      <div class="clock" id="clock">--:--<span>:--</span></div>
+      <div class="date" id="date"></div>
+      <div class="pill wait" id="pill"><span id="pillTxt">Connexion…</span></div>
+    </div>
+
+    <div class="card" id="closed" hidden>
+      <h2>Connexion impossible</h2>
+      <p class="muted" id="closedTxt">Vérifiez votre connexion internet, puis réessayez.</p>
+      <button class="btn wide" type="button" id="reload">Réessayer</button>
+    </div>
+
+    <div class="msg" id="verBanner" hidden></div>
+
+    <div class="card scanhero" id="welcome" hidden>
+      <svg class="qrico" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 22V12a4 4 0 0 1 4-4h10M42 8h10a4 4 0 0 1 4 4v10M56 42v10a4 4 0 0 1-4 4H42M22 56H12a4 4 0 0 1-4-4V42"/><rect x="18" y="18" width="11" height="11" rx="2"/><rect x="35" y="18" width="11" height="11" rx="2"/><rect x="18" y="35" width="11" height="11" rx="2"/><path d="M36 36h4v4h-4zM42 42h4v4h-4zM36 46h2"/></svg>
+      <h2 id="welcomeH">Scannez votre carte pour pointer</h2>
+      <p class="muted" id="welcomeNote">Chaque personne a sa carte personnelle avec un QR code.</p>
+      <button class="btn wide" type="button" id="noCardBtn">Je travaille à distance (télétravail)</button>
+      <div id="findBox" hidden style="text-align:left">
+        <label>Télétravail : tapez votre nom (3 lettres au moins)<input id="findQ" autocomplete="off" placeholder="Ex : Awa"></label>
+        <div class="found" id="found"></div>
+        <p class="muted" style="font-size:.85rem;margin-top:10px">Vous ne trouvez pas votre nom ? Il doit d’abord être ajouté par le RH.</p>
+      </div>
+      <p class="sepline"><span>Au bureau</span></p>
+      <ul class="steps" id="welcomeSteps"></ul>
+    </div>
+
+    <div class="card namepick" id="namePick" hidden>
+      <h2>Qui êtes-vous ?</h2>
+      <p class="muted">Vous êtes au bureau. Cherchez votre nom dans la liste puis touchez-le.</p>
+      <input id="npQ" type="search" autocomplete="off" placeholder="Chercher votre nom…" aria-label="Rechercher votre nom">
+      <div class="found names" id="npList"></div>
+      <p class="npfoot"><button class="link" type="button" id="npTele">Je travaille à distance</button><button class="link" type="button" id="npCard">J’ai une carte personnelle</button></p>
+    </div>
+
+    <div class="card" id="setPin" hidden>
+      <div class="person"><span id="spAvatar"></span><div><h2 id="spTitle">Bonjour</h2><small>Dernière étape avant votre premier pointage</small></div></div>
+      <p>Choisissez un <b>code à 4 chiffres</b>. Il vous protège : personne d’autre ne pourra pointer à votre place.</p>
+      <p class="muted" id="spNote" style="font-size:.88rem;margin-top:-6px" hidden>Ce téléphone sera proposé au RH comme votre appareil de pointage : une coche bleue apparaîtra sur vos pointages une fois qu’il l’aura validé.</p>
+      <label>Votre code<input id="spNew" class="pinbox" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••"></label>
+      <label>Confirmez votre code<input id="spNew2" class="pinbox" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••"></label>
+      <p class="err" id="spErr" role="alert"></p>
+      <button class="btn wide" type="button" id="spSave">Enregistrer mon code</button>
+      <p class="muted" style="font-size:.85rem;margin-top:10px">Retenez-le bien : vous le taperez à chaque pointage. Oublié ? Un gestionnaire peut le réinitialiser.</p>
+    </div>
+
+    <form class="card" id="punchCard" hidden autocomplete="off">
+      <div class="person"><span id="meAvatar"></span><div><h2 id="meTitle">Bonjour</h2><small id="meLine"></small></div></div>
+      <div class="modeq">Où travaillez-vous aujourd’hui ?</div>
+      <div class="modeseg" id="modeSeg" role="group" aria-label="Où travaillez-vous aujourd’hui ?">
+        <button type="button" data-w="bureau" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16M16 9h2a2 2 0 0 1 2 2v10M2 21h20M8 7h4M8 11h4M8 15h4"/></svg>Au bureau</button>
+        <button type="button" data-w="tele"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5h4v5"/></svg>En télétravail</button>
+      </div>
+      <p class="doorhint" id="doorHint" hidden>Pour pointer <b>au bureau</b>, scannez le QR code affiché à l’entrée.</p>
+      <div class="geo wait" id="geo"><span id="geoTxt">Vérification de votre position…</span></div>
+      <p style="margin:6px 0 0"><button type="button" class="link" id="retry" hidden>Revérifier ma position</button></p>
+      <label style="text-align:center">Votre code<input id="pin" class="pinbox" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••"></label>
+      <div class="go"><button class="gobtn" id="send" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/><path d="M4 6l6 6-6 6" opacity=".55"/></svg><span id="sendTxt">Pointer</span></button></div>
+      <p class="err" id="err" role="alert" style="text-align:center"></p>
+      <p style="text-align:center;margin:0"><button class="link" type="button" id="errChat" hidden>Écrire au RH</button></p>
+      <p style="text-align:center;margin:8px 0 0"><button class="link" type="button" id="forget">Ce n’est pas moi</button></p>
+    </form>
+
+    <div class="card done" id="done" hidden></div>
+  </section>
+
+  <!-- ÉQUIPE -->
+  <section id="v-members" hidden>
+    <div style="margin:18px 0 4px"><h2>L’équipe aujourd’hui</h2></div>
+    <div class="datebar"><button class="btn line sm" id="dPrev" type="button" aria-label="Jour précédent">‹</button><h2 id="dTitle"></h2><button class="btn line sm" id="dNext" type="button" aria-label="Jour suivant">›</button></div>
+    <div class="counters" id="counters"></div>
+    <p class="telenote" id="teleNote" hidden></p>
+    <div class="msg" id="mErr" hidden></div>
+    <div class="privacy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><div><b>Vos données restent privées.</b><br>Cette page ne montre que des nombres. Les noms et les heures sont visibles uniquement des gestionnaires de Soned.</div></div>
+  </section>
+
+  <!-- PROFIL -->
+  <section id="v-me" hidden>
+    <div id="meBody"></div>
+  </section>
+
+  <!-- ADMINISTRATION -->
+  <section id="v-admin" class="adm" hidden>
+    <div class="card" id="adminLock" style="margin-top:18px">
+      <h2>Espace RH</h2>
+      <p class="muted">Réservé aux gestionnaires (RH, informaticien…). Entrez votre mot de passe personnel. Première connexion ? Entrez le code provisoire qui vous a été remis : vous créerez ensuite votre compte.</p>
+      <form id="aForm"><label>Mot de passe ou code provisoire<input id="aCode" type="password" autocomplete="off" placeholder="Votre mot de passe"></label>
+      <p class="err" id="aErr" role="alert"></p>
+      <button class="btn wide" type="submit">Entrer</button></form>
+    </div>
+    <div id="adminApp" hidden>
+      <div class="who"><span id="aAvatar"></span><div><b id="aName">Gestionnaire</b><small id="aRole">RH</small></div><button class="bell" id="aBell" type="button" aria-label="Alertes" title="Alertes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21a2 2 0 0 0 4 0"/></svg><i id="aBellN" hidden>0</i></button><button class="btn line sm" id="aOut" type="button" style="margin-left:auto">Sortir</button></div>
+      <div class="atabs" id="atabs"></div>
+      <div class="msg" id="aMsg" hidden></div>
+      <div id="aBody"></div>
+    </div>
+  </section>
+
+  <footer class="signature">Développé par <a href="https://www.linkedin.com/in/mamadou-fall-79b402438" target="_blank" rel="noopener noreferrer">Mamadou Fall</a>, étudiant en programmation · 2026<br>Réalisé sous l’encadrement de M. Djiby, responsable informatique</footer>
+</main>
+
+<nav class="tabs" id="tabs" aria-label="Navigation">
+  <button type="button" data-tab="point" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/><path d="M4 6l6 6-6 6" opacity=".5"/></svg>Pointage</button>
+  <button type="button" data-tab="members"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.5-3.2 2.8-5 5.5-5s5 1.8 5.5 5"/><circle cx="17" cy="9" r="2.4"/><path d="M16.5 14.2c2.4.1 4 1.5 4.5 4.3"/></svg>Équipe</button>
+  <button type="button" data-tab="me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c.6-4 3.4-6 7-6s6.4 2 7 6"/></svg>Profil</button>
+  <button type="button" data-tab="admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7.5 3v5.5c0 4.5-3.1 8-7.5 9.5-4.4-1.5-7.5-5-7.5-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg>RH</button>
+</nav>
+
+<div id="modal" hidden><div id="modalBox" role="dialog" aria-modal="true"></div></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<div id="printSheet" aria-hidden="true"></div>
+
+<script src="logo.js"></script>
+<script src="qr.js"></script>
+<script src="script.js"></script>
+<script src="admin.js"></script>
+<script>boot();</script>
+</body>
+</html>
